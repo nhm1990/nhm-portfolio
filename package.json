@@ -1,0 +1,21 @@
+{
+  "name": "nhm-portfolio-new",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.11.2",
+    "@nuxt/eslint": "^1.15.1",
+    "@nuxt/fonts": "^0.13.0",
+    "@nuxt/icon": "^2.2.1",
+    "@nuxt/image": "^2.0.0",
+    "@primevue/nuxt-module": "^4.5.4",
+    "better-sqlite3": "^12.6.2",
+    "nuxt": "^4.3.1"
+  }
+}
