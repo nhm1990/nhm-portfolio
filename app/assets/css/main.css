@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+/* Custom color classes */
+@layer utilities {
+  .text-bronze {
+    color: #7A453F;
+  }
+  
+  .text-skyblue {
+    color: #B9D1E9;
+  }
+  
+  .text-charcoal {
+    color: #2C2D32;
+  }
+  
+  .text-cream {
+    color: #FFFFF8;
+  }
+  
+  .text-sage {
+    color: #959684;
+  }
+  
+  .bg-bronze {
+    background-color: #7A453F;
+  }
+  
+  .bg-skyblue {
+    background-color: #B9D1E9;
+  }
+  
+  .bg-charcoal {
+    background-color: #2C2D32;
+  }
+  
+  .bg-cream {
+    background-color: #FFFFF8;
+  }
+  
+  .bg-sage {
+    background-color: #959684;
+  }
+}

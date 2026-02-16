@@ -1,0 +1,48 @@
+{
+	"nav": {
+		"home": "Home",
+		"about": "About",
+		"portfolio": "Portfolio",
+		"clients": "Clients",
+		"contact": "Contact"
+	},
+	"hero": {
+		"greeting": "Hi, I'm Nicolas",
+		"title": "Software Developer",
+		"description": "I build modern, scalable web applications and help businesses transform their ideas into powerful digital solutions."
+	},
+	"clients": {
+		"title": "Trusted by Leading Companies",
+		"subtitle": "I've had the privilege to work with",
+		"cta": "Is your brand next? Let's chat"
+	},
+	"portfolio": {
+		"title": "Work Front & Center",
+		"subtitle": "Explore my recent projects",
+		"explore": "Explore my work further"
+	},
+	"marquee": {
+		"text": "I'll submit. I'll answer. I'll verify. I'll confirm. I'll validate. I'll check. I'll ensure. I'll guarantee. I'll promise. I'll deliver. I'll succeed. I'll win. I'll triumph. I'll master. I'll conquer. I'll achieve. I'll accomplish. I'll finish. I'll initiate. I'll launch. I'll trigger. I'll commence. I'll enable. I'll engage. I'll start. I'll run. I'll execute. I'll perform. I'll do. I'll act. I'll work. I'll function. I'll operate. I'll go. I'll move. I'll step. I'll walk. I'll jog. I'll sprint. I'll dash. I'll rush. I'll hurry. I'll speed. I'll race."
+	},
+	"footer": {
+		"description": "Software Developer passionate about building modern, scalable web applications.",
+		"quickLinks": "Quick Links",
+		"connect": "Connect",
+		"rights": "All rights reserved"
+	},
+	"contact": {
+		"form": {
+			"name": "Name",
+			"email": "Email",
+			"subject": "Subject",
+			"message": "Message",
+			"namePlaceholder": "Your Name",
+			"emailPlaceholder": "your{'@'}email.com",
+			"subjectPlaceholder": "Project Discussion",
+			"messagePlaceholder": "Tell me about your project...",
+			"sendButton": "Send Message",
+			"successMessage": "Message sent successfully!",
+			"errorMessage": "Failed to send message. Please try again."
+		}
+	}
+}
