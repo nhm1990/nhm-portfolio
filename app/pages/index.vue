@@ -49,6 +49,8 @@ watchEffect(() => {
       <MarqueeBanner />
       <ClientsSection :content="clientsData" />
       <PortfolioSection :content="portfolioProjects" />
+      <SkillsSection />
+      <ExperienceSection />
       <ContactSection :content="contactData" />
       <FooterSection />
     </template>

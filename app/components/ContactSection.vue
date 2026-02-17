@@ -149,35 +149,62 @@ const handleSubmit = async () => {
         <!-- Contact Info -->
         <div class="mt-12 pt-12 border-t border-gray-200">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-            <div class="flex flex-col items-center">
+            <a
+              :href="`mailto:${content.email}`"
+              class="flex flex-col items-center group hover:scale-105 transition-transform"
+            >
               <div
-                class="w-12 h-12 bg-gradient-to-br from-[#7A453F] to-[#B9D1E9] rounded-full flex items-center justify-center mb-3"
+                class="w-12 h-12 bg-gradient-to-br from-[#7A453F] to-[#B9D1E9] rounded-full flex items-center justify-center mb-3 group-hover:shadow-lg transition-shadow"
               >
-                <i class="pi pi-envelope text-white text-xl"></i>
+                <Icon name="mdi:email" class="text-white text-2xl" />
               </div>
               <p class="text-sm text-[#2C2D32]/60">Email</p>
-              <p class="font-semibold text-[#2C2D32]">{{ content.email }}</p>
-            </div>
+              <p class="font-semibold text-[#2C2D32] group-hover:text-[#7A453F] transition-colors">
+                {{ content.email }}
+              </p>
+            </a>
 
-            <div class="flex flex-col items-center">
+            <a
+              :href="content.linkedin"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex flex-col items-center group hover:scale-105 transition-transform"
+            >
               <div
-                class="w-12 h-12 bg-gradient-to-br from-[#7A453F] to-[#B9D1E9] rounded-full flex items-center justify-center mb-3"
+                class="w-12 h-12 bg-gradient-to-br from-[#7A453F] to-[#B9D1E9] rounded-full flex items-center justify-center mb-3 group-hover:shadow-lg transition-shadow p-2"
               >
-                <i class="pi pi-linkedin text-white text-xl"></i>
+                <NuxtImg
+                  src="/images/linkedin.png"
+                  alt="LinkedIn"
+                  class="w-full h-full object-contain"
+                />
               </div>
               <p class="text-sm text-[#2C2D32]/60">LinkedIn</p>
-              <p class="font-semibold text-[#2C2D32]">{{ content.linkedin }}</p>
-            </div>
+              <p class="font-semibold text-[#2C2D32] group-hover:text-[#7A453F] transition-colors">
+                Nicolas Hormesch
+              </p>
+            </a>
 
-            <div class="flex flex-col items-center">
+            <a
+              :href="content.github"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex flex-col items-center group hover:scale-105 transition-transform"
+            >
               <div
-                class="w-12 h-12 bg-gradient-to-br from-[#7A453F] to-[#B9D1E9] rounded-full flex items-center justify-center mb-3"
+                class="w-12 h-12 bg-gradient-to-br from-[#7A453F] to-[#B9D1E9] rounded-full flex items-center justify-center mb-3 group-hover:shadow-lg transition-shadow p-2"
               >
-                <i class="pi pi-github text-white text-xl"></i>
+                <NuxtImg
+                  src="/images/github.png"
+                  alt="GitHub"
+                  class="w-full h-full object-contain"
+                />
               </div>
               <p class="text-sm text-[#2C2D32]/60">GitHub</p>
-              <p class="font-semibold text-[#2C2D32]">{{ content.github }}</p>
-            </div>
+              <p class="font-semibold text-[#2C2D32] group-hover:text-[#7A453F] transition-colors">
+                nhm1990
+              </p>
+            </a>
           </div>
         </div>
       </div>
