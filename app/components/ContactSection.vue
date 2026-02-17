@@ -59,8 +59,12 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <section id="contact" class="py-20 bg-gradient-to-br from-white via-[#FFFFF8] to-[#B9D1E9]/20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="contact" class="relative py-20 bg-white bg-pattern-hexagons overflow-hidden">
+    <!-- Hexagon Background Elements -->
+    <div class="absolute top-0 right-0 w-80 h-80 bg-mint-200 rounded-full blur-3xl opacity-20" />
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-sage-200 rounded-full blur-3xl opacity-20" />
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
         class="text-center mb-16"
         v-motion
@@ -68,11 +72,11 @@ const handleSubmit = async () => {
         :visible="{ opacity: 1, y: 0, transition: { duration: 600 } }"
       >
         <h2
-          class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#7A453F] to-[#2C2D32] bg-clip-text text-transparent"
+          class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-text bg-clip-text text-transparent"
         >
           {{ content.title }}
         </h2>
-        <p class="text-xl text-[#2C2D32]/70">{{ content.subtitle }}</p>
+        <p class="text-xl text-charcoal-700">{{ content.subtitle }}</p>
       </div>
 
       <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12">

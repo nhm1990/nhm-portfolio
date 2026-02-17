@@ -39,8 +39,14 @@ const scrollToSection = (id: string) => {
 </script>
 
 <template>
-  <section id="clients" class="py-20 bg-gradient-to-br from-white to-[#FFFFF8]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="clients" class="relative py-20 bg-sage-50 bg-pattern-grid overflow-hidden">
+    <!-- Dekorative Elemente -->
+    <div class="absolute top-10 right-20 w-64 h-64 bg-mint-200 rounded-full blur-3xl opacity-20" />
+    <div
+      class="absolute bottom-10 left-20 w-48 h-48 bg-sage-300 rounded-full blur-3xl opacity-20"
+    />
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
         v-motion
         class="text-center mb-16"
@@ -48,11 +54,11 @@ const scrollToSection = (id: string) => {
         :visible="{ opacity: 1, y: 0, transition: { duration: 600 } }"
       >
         <h2
-          class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#7A453F] to-[#2C2D32] bg-clip-text text-transparent"
+          class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-text bg-clip-text text-transparent"
         >
           {{ content.title }}
         </h2>
-        <p class="text-xl text-[#2C2D32]/70">
+        <p class="text-xl text-charcoal-700">
           {{ content.subtitle }}
         </p>
       </div>
@@ -63,14 +69,14 @@ const scrollToSection = (id: string) => {
           v-for="(client, index) in content.list"
           :key="client.name"
           :style="{ transitionDelay: `${index * 100}ms` }"
-          class="flex items-center justify-center p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group"
+          class="flex items-center justify-center p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group border border-sage-100"
         >
           <div class="text-center">
             <div class="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
               {{ client.icon }}
             </div>
             <p
-              class="text-sm font-semibold text-[#2C2D32] group-hover:text-[#7A453F] transition-colors"
+              class="text-sm font-semibold text-charcoal-900 group-hover:text-sage-600 transition-colors"
             >
               {{ client.name }}
             </p>
@@ -80,24 +86,24 @@ const scrollToSection = (id: string) => {
 
       <!-- CTA Banner -->
       <div
-        class="relative overflow-hidden bg-gradient-to-r from-[#7A453F] via-[#2C2D32] to-[#7A453F] rounded-2xl p-12 text-center shadow-2xl"
+        class="relative overflow-hidden bg-gradient-dark bg-pattern-circuit rounded-2xl p-12 text-center shadow-2xl"
       >
-        <!-- <div class="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div> -->
+        <div class="absolute inset-0 bg-charcoal-900/60" />
         <div class="relative z-10">
           <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">
             {{ content.cta }}
           </h3>
           <Button
             :label="t('nav.contact')"
-            class="!bg-white !text-[#7A453F] !border-0 !px-8 !py-3 !text-lg !font-semibold hover:!scale-105 transition-transform"
+            class="!bg-white !text-sage-600 !border-0 !px-8 !py-3 !text-lg !font-semibold hover:!scale-105 hover:!shadow-xl transition-all"
             raised
             @click="scrollToSection('contact')"
           />
         </div>
 
         <!-- Decorative elements -->
-        <div class="absolute top-0 left-0 w-40 h-40 bg-[#B9D1E9]/20 rounded-full blur-3xl" />
-        <div class="absolute bottom-0 right-0 w-40 h-40 bg-[#959684]/20 rounded-full blur-3xl" />
+        <div class="absolute top-0 left-0 w-40 h-40 bg-mint-500/20 rounded-full blur-3xl" />
+        <div class="absolute bottom-0 right-0 w-40 h-40 bg-sage-500/20 rounded-full blur-3xl" />
       </div>
     </div>
   </section>

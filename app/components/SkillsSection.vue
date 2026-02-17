@@ -33,8 +33,12 @@ const skillsByLevel = computed(() => {
 </script>
 
 <template>
-  <section id="skills" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="skills" class="relative py-20 bg-mint-50 bg-pattern-dots overflow-hidden">
+    <!-- Dekorative Dots & Blur -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-sage-300 rounded-full blur-3xl opacity-20" />
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-mint-300 rounded-full blur-3xl opacity-20" />
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div
         v-motion
@@ -43,11 +47,11 @@ const skillsByLevel = computed(() => {
         class="text-center mb-16"
       >
         <h2
-          class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#7A453F] to-[#2C2D32] bg-clip-text text-transparent"
+          class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-text bg-clip-text text-transparent"
         >
           Skills & Expertise
         </h2>
-        <p class="text-xl text-[#2C2D32]/70">Technologies & Tools I Work With</p>
+        <p class="text-xl text-charcoal-700">Technologies & Tools I Work With</p>
       </div>
 
       <!-- Skills Tag Cloud -->

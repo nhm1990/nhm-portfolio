@@ -1,9 +1,20 @@
 <template>
   <section
     id="home"
-    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#FFFFF8] via-white to-[#B9D1E9]/20 pt-20"
+    class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-white"
   >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <!-- Hintergrundmuster -->
+    <div class="absolute inset-0 bg-pattern-leaves opacity-100" />
+    <div class="absolute inset-0 bg-gradient-hero" />
+    <div
+      class="absolute top-20 right-10 w-96 h-96 bg-mint-200 rounded-full blur-3xl opacity-30 animate-float"
+    />
+    <div
+      class="absolute bottom-20 left-10 w-80 h-80 bg-sage-300 rounded-full blur-3xl opacity-40 animate-float"
+      style="animation-delay: 1s"
+    />
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 z-10">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <!-- Text Content -->
         <div
@@ -14,29 +25,29 @@
         >
           <div class="inline-block mb-4">
             <span
-              class="px-4 py-2 bg-[#B9D1E9]/30 text-[#7A453F] rounded-full text-sm font-semibold"
+              class="px-4 py-2 bg-sage-100 text-sage-700 rounded-full text-sm font-semibold shadow-sm border border-sage-200"
             >
               {{ content.greeting }}
             </span>
           </div>
           <h1
-            class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-[#7A453F] via-[#2C2D32] to-[#7A453F] bg-clip-text text-transparent"
+            class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-text bg-clip-text text-transparent"
           >
             {{ content.title }}
           </h1>
-          <p class="text-lg md:text-xl text-[#2C2D32]/80 mb-8 max-w-2xl">
+          <p class="text-lg md:text-xl text-charcoal-700 mb-8 max-w-2xl leading-relaxed">
             {{ content.description }}
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <Button
               :label="t('nav.portfolio')"
-              class="!bg-gradient-to-r from-[#7A453F] to-[#B9D1E9] !border-0 !text-white !px-8 !py-3 !text-lg"
+              class="!bg-gradient-primary !border-0 !text-white !px-8 !py-3 !text-lg !shadow-lg hover:!shadow-xl hover:!scale-105 !transition-all"
               raised
               @click="scrollToSection('portfolio')"
             />
             <Button
               :label="t('nav.contact')"
-              class="!border-2 !border-[#7A453F] !text-[#7A453F] !px-8 !py-3 !text-lg"
+              class="!border-2 !border-sage-500 !text-sage-600 !px-8 !py-3 !text-lg hover:!bg-sage-50 !transition-all"
               outlined
               @click="scrollToSection('contact')"
             />
@@ -51,36 +62,36 @@
           :visible="{ opacity: 1, x: 0, transition: { duration: 800, delay: 200 } }"
         >
           <div class="relative">
-            <!-- Decorative circles -->
-            <div class="absolute -top-4 -left-4 w-72 h-72 bg-[#B9D1E9]/20 rounded-full blur-3xl" />
+            <!-- Decorative blurred circles -->
             <div
-              class="absolute -bottom-4 -right-4 w-72 h-72 bg-[#7A453F]/10 rounded-full blur-3xl"
+              class="absolute -top-4 -left-4 w-72 h-72 bg-mint-200 rounded-full blur-3xl opacity-40"
+            />
+            <div
+              class="absolute -bottom-4 -right-4 w-72 h-72 bg-sage-200 rounded-full blur-3xl opacity-40"
             />
 
             <!-- Image container with gradient border -->
-            <div
-              class="relative p-1 bg-gradient-to-br from-[#7A453F] via-[#B9D1E9] to-[#959684] rounded-full"
-            >
+            <div class="relative p-1 bg-gradient-primary rounded-full shadow-2xl">
               <div class="bg-white p-2 rounded-full">
                 <img
                   src="/images/profile.jpeg"
                   alt="Nicolas Hormesch"
-                  class="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full object-cover shadow-2xl"
+                  class="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full object-cover"
                 />
               </div>
             </div>
 
             <!-- Floating elements -->
             <div
-              class="absolute -top-6 right-10 bg-white rounded-lg shadow-xl p-3 animate-bounce-slow z-10"
+              class="absolute -top-6 right-10 bg-white rounded-2xl shadow-xl p-4 animate-float z-10 border border-sage-100"
             >
-              <Icon name="mdi:code-tags" class="text-3xl text-[#7A453F]" />
+              <Icon name="mdi:code-tags" class="text-3xl text-sage-600" />
             </div>
             <div
-              class="absolute -bottom-6 left-10 bg-white rounded-lg shadow-xl p-3 animate-bounce-slow z-10"
+              class="absolute -bottom-6 left-10 bg-white rounded-2xl shadow-xl p-4 animate-float z-10 border border-mint-100"
               style="animation-delay: 0.5s"
             >
-              <Icon name="mdi:laptop" class="text-3xl text-[#B9D1E9]" />
+              <Icon name="mdi:laptop" class="text-3xl text-mint-500" />
             </div>
           </div>
         </div>
@@ -122,19 +133,3 @@ const scrollToSection = (id: string) => {
   }
 }
 </script>
-
-<style scoped>
-@keyframes bounce-slow {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 3s ease-in-out infinite;
-}
-</style>

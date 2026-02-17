@@ -1,10 +1,11 @@
 <template>
-  <footer class="bg-gradient-to-r from-[#2C2D32] to-[#7A453F] text-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <footer class="bg-gradient-dark bg-pattern-circuit text-white py-12 relative overflow-hidden">
+    <div class="absolute inset-0 bg-charcoal-900/70" />
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         <div>
           <h3
-            class="text-xl font-bold mb-4 bg-gradient-to-r from-white to-[#B9D1E9] bg-clip-text text-transparent"
+            class="text-xl font-bold mb-4 bg-gradient-to-r from-white to-mint-400 bg-clip-text text-transparent"
           >
             Nicolas Hormesch
           </h3>

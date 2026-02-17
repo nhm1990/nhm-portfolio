@@ -7,13 +7,15 @@ const phrases = computed(() => {
 })
 </script>
 
-
 <template>
   <div
-    class="relative overflow-hidden bg-gradient-to-r from-[#7A453F] via-[#2C2D32] to-[#7A453F] py-6 border-y-4 border-[#B9D1E9]"
+    class="relative overflow-hidden bg-gradient-dark bg-pattern-circuit py-8 border-y-2 border-sage-500/30"
   >
+    <!-- Overlay für bessere Lesbarkeit -->
+    <div class="absolute inset-0 bg-charcoal-900/40" />
+
     <!-- Marquee Container -->
-    <div class="flex whitespace-nowrap animate-marquee">
+    <div class="relative flex whitespace-nowrap animate-marquee">
       <!-- First instance of text -->
       <div class="flex items-center">
         <span
@@ -21,10 +23,10 @@ const phrases = computed(() => {
           :key="`first-${index}`"
           class="inline-flex items-center mx-6"
         >
-          <span class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+          <span class="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg">
             {{ phrase }}
           </span>
-          <span class="mx-6 text-[#B9D1E9] text-4xl">✦</span>
+          <span class="mx-6 text-mint-400 text-4xl">✦</span>
         </span>
       </div>
       <!-- Second instance for seamless loop -->
@@ -34,10 +36,10 @@ const phrases = computed(() => {
           :key="`second-${index}`"
           class="inline-flex items-center mx-6"
         >
-          <span class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+          <span class="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg">
             {{ phrase }}
           </span>
-          <span class="mx-6 text-[#B9D1E9] text-4xl">✦</span>
+          <span class="mx-6 text-mint-400 text-4xl">✦</span>
         </span>
       </div>
     </div>

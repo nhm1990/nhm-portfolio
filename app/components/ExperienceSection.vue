@@ -39,18 +39,27 @@ const timelineEvents = computed(() => {
 
 const getIndustryColor = (industry: string) => {
   const colors: Record<string, string> = {
-    Chemical: '#7A453F',
-    Finance: '#B9D1E9',
-    Insurance: '#959684',
-    'IT Consulting': '#2C2D32',
+    Chemical: '#5d7a52', // moss-500
+    Finance: '#3bb06a', // mint-500
+    Insurance: '#7aa87a', // sage-400
+    'IT Consulting': '#2C2D32', // charcoal-900
   }
-  return colors[industry] || '#7A453F'
+  return colors[industry] || '#5a8a5a'
 }
 </script>
 
 <template>
-  <section id="experience" class="py-20 bg-gradient-to-br from-[#FFFFF8] via-white to-[#B9D1E9]/10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="experience" class="relative py-20 bg-sage-50 bg-pattern-binary overflow-hidden">
+    <!-- Binary Background Elements -->
+    <div
+      class="absolute top-10 left-10 w-64 h-64 bg-moss-200 rounded-full blur-3xl opacity-20 animate-float"
+    />
+    <div
+      class="absolute bottom-20 right-20 w-72 h-72 bg-sage-300 rounded-full blur-3xl opacity-25 animate-float"
+      style="animation-delay: 2s"
+    />
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div
         v-motion
@@ -59,11 +68,11 @@ const getIndustryColor = (industry: string) => {
         class="text-center mb-16"
       >
         <h2
-          class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#7A453F] to-[#2C2D32] bg-clip-text text-transparent"
+          class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-text bg-clip-text text-transparent"
         >
           Professional Experience
         </h2>
-        <p class="text-xl text-[#2C2D32]/70">Recent Projects & Achievements</p>
+        <p class="text-xl text-charcoal-700">Recent Projects & Achievements</p>
       </div>
 
       <!-- Timeline -->
@@ -91,10 +100,10 @@ const getIndustryColor = (industry: string) => {
               <template #title>
                 <div class="flex items-start justify-between gap-4">
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-[#2C2D32] mb-1">
+                    <h3 class="text-xl font-bold text-charcoal-900 mb-1">
                       {{ slotProps.item.company }}
                     </h3>
-                    <p class="text-sm font-semibold text-[#7A453F]">{{ slotProps.item.role }}</p>
+                    <p class="text-sm font-semibold text-sage-600">{{ slotProps.item.role }}</p>
                   </div>
                   <Chip
                     :label="slotProps.item.industry"
@@ -108,14 +117,14 @@ const getIndustryColor = (industry: string) => {
               </template>
 
               <template #subtitle>
-                <div class="flex items-center gap-1 text-xs text-surface-500">
+                <div class="flex items-center gap-1 text-xs text-gray-500">
                   <Icon name="mdi:calendar" class="text-sm" />
                   {{ slotProps.item.date }}
                 </div>
               </template>
 
               <template #content>
-                <p class="text-surface-700 mb-4 text-sm">{{ slotProps.item.description }}</p>
+                <p class="text-gray-800 mb-4 text-sm">{{ slotProps.item.description }}</p>
 
                 <!-- Technologies -->
                 <div class="flex flex-wrap gap-2 mb-4">
@@ -123,7 +132,7 @@ const getIndustryColor = (industry: string) => {
                     v-for="tech in slotProps.item.technologies"
                     :key="tech"
                     :label="tech"
-                    class="!bg-surface-100 !text-surface-700 !text-xs !px-3 !py-1"
+                    class="!bg-sage-100 !text-sage-700 !text-xs !px-3 !py-1 border border-sage-200"
                   />
                 </div>
 
@@ -132,7 +141,7 @@ const getIndustryColor = (industry: string) => {
                   icon="mdi:information"
                   severity="secondary"
                   text
-                  class="!text-[#7A453F] hover:!bg-[#7A453F]/10 !mt-2"
+                  class="!text-sage-600 hover:!bg-sage-100 !mt-2"
                   @click="openProjectDetails(slotProps.item.projectData)"
                 />
               </template>
