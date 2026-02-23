@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PortfolioContent } from '~/types/portfolio'
+import type { PortfolioContent } from '~/models/portfolio'
 
 const { content } = usePortfolioContent()
 

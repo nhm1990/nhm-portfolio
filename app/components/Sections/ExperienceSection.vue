@@ -5,8 +5,6 @@ const { data: rawData } = await useAsyncData('experience', () =>
 
 const experienceData = computed(() => rawData.value?.meta || null)
 
-console.log('Experience Data: ', experienceData.value)
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedProject = ref<any | null>(null)
 const dialogVisible = ref(false)
@@ -21,7 +19,6 @@ const timelineEvents = computed(() => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const data = experienceData.value as any
 
-  console.log('Raw Experience Data: ', data)
   if (!data?.projects) return []
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

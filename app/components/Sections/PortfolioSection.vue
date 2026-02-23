@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Project } from '~/types/portfolio'
+import type { Project } from '~/models/portfolio'
 
 interface Props {
   content?: {
