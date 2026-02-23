@@ -47,11 +47,11 @@ watchEffect(() => {
     <template v-else-if="portfolioData">
       <HeroSection :content="heroData" />
       <MarqueeBanner />
-      <ClientsSection :content="clientsData" />
       <PortfolioSection :content="portfolioProjects" />
       <SkillsSection />
       <ExperienceSection />
       <ContactSection :content="contactData" />
+      <ClientsSection :content="clientsData" />
       <FooterSection />
     </template>
   </div>

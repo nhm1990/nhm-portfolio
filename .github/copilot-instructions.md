@@ -47,6 +47,35 @@ const data: UserData = fetchData();
 
 ## Design & Styling
 
+### Animationen
+**Für alle Animationen `motion-v` verwenden** - den offiziellen Vue-Port von Framer Motion.
+
+- Kein `@vueuse/motion` (`v-motion`) oder CSS-Klassen-Tricks
+- Animationen über die `<Motion>` Komponente oder `useAnimate` / `useMotionValue`
+- `whileInView` für scroll-getriggerte Animationen mit `:viewport="{ once: true }"`
+
+```vue
+<script setup lang="ts">
+import { Motion } from 'motion-v'
+</script>
+
+<template>
+  <!-- ✅ Gut -->
+  <Motion
+    tag="div"
+    :initial="{ opacity: 0, y: 40 }"
+    :while-in-view="{ opacity: 1, y: 0 }"
+    :transition="{ duration: 0.7, ease: 'easeOut' }"
+    :viewport="{ once: true }"
+  >
+    ...
+  </Motion>
+
+  <!-- ❌ Schlecht -->
+  <div v-motion :initial="{ opacity: 0 }" :visible="{ opacity: 1 }">...</div>
+</template>
+```
+
 ### Zentrale Farbschemata
 **ALLE Farbdefinitionen werden zentral verwaltet:**
 

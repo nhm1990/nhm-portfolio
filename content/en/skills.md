@@ -19,6 +19,8 @@ categories:
         level: expert
       - name: Tailwind
         level: advanced
+      - name: AG Grid
+        level: advanced
   - name: UI/UX Design
     skills:
       - name: Figma
@@ -33,24 +35,52 @@ categories:
     skills:
       - name: Node.js
         level: advanced
+      - name: Python
+        level: advanced
+      - name: FastAPI
+        level: advanced
+      - name: Express.js
+        level: advanced
+      - name: PostgreSQL
+        level: advanced
       - name: MongoDB
         level: intermediate
-      - name: PostgreSQL
+      - name: Redis
         level: intermediate
-  - name: Tools & DevOps
+      - name: WebSocket
+        level: intermediate
+  - name: Mobile
     skills:
+      - name: Kotlin
+        level: advanced
+      - name: Android
+        level: intermediate
+  - name: AI & Machine Learning
+    skills:
+      - name: TensorFlow
+        level: intermediate
+      - name: OpenAI API
+        level: intermediate
+      - name: Azure ML
+        level: intermediate
+  - name: DevOps & Cloud
+    skills:
+      - name: Docker
+        level: advanced
+      - name: Kubernetes
+        level: intermediate
       - name: GitHub
         level: advanced
       - name: Azure DevOps
         level: advanced
       - name: GitLab
         level: intermediate
+  - name: Tools & Methods
+    skills:
       - name: Jira
         level: intermediate
       - name: Subversion
         level: intermediate
-  - name: Project Management
-    skills:
       - name: Scrum
         level: advanced
       - name: Agile

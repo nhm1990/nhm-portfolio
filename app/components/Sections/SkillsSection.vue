@@ -1,144 +1,76 @@
 <script setup lang="ts">
+import { Motion } from 'motion-v'
+import type { Skill, SkillsContent } from '~/models/skills'
+
 const { data: rawData } = await useAsyncData('skills', () =>
   queryCollection('content_en').path('/skills').first()
 )
 
-const skillsData = computed(() => rawData.value?.meta || null)
+const skillsData = computed(() => rawData.value?.meta as SkillsContent | null)
 
-const skillsByLevel = computed(() => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const data = skillsData.value as any
-  if (!data?.categories) return { expert: [], advanced: [], intermediate: [] }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const grouped: { expert: any[]; advanced: any[]; intermediate: any[] } = {
-    expert: [],
-    advanced: [],
-    intermediate: [],
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data.categories.forEach((category: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    category.skills.forEach((skill: any) => {
-      const level = skill.level as 'expert' | 'advanced' | 'intermediate'
-      if (level in grouped) {
-        grouped[level].push(skill)
-      }
-    })
-  })
-
-  return grouped
+const allSkills = computed<Skill[]>(() => {
+  if (!skillsData.value?.categories) return []
+  return skillsData.value.categories.flatMap((cat) => cat.skills)
 })
+
+// ── Lane distribution ──────────────────────────────────────
+// Rightbound fast  (→): expert skills
+// Rightbound slow  (→): first half of advanced
+// Leftbound  slow  (←): second half of advanced
+// Leftbound  fast  (←): intermediate skills
+const laneAFast = computed(() => allSkills.value.filter((s) => s.level === 'expert'))
+const advancedSkills = computed(() => allSkills.value.filter((s) => s.level === 'advanced'))
+const laneASlow = computed(() =>
+  advancedSkills.value.slice(0, Math.ceil(advancedSkills.value.length / 2))
+)
+const laneBSlow = computed(() =>
+  advancedSkills.value.slice(Math.ceil(advancedSkills.value.length / 2))
+)
+const laneBFast = computed(() => allSkills.value.filter((s) => s.level === 'intermediate'))
 </script>
 
 <template>
-  <section id="skills" class="relative py-20 bg-mint-50 bg-pattern-dots overflow-hidden">
-    <!-- Dekorative Dots & Blur -->
+  <section id="skills" class="relative py-24 bg-sage-50 overflow-hidden">
+    <!-- Background blur accents -->
     <div class="absolute top-0 right-0 w-96 h-96 bg-sage-300 rounded-full blur-3xl opacity-20" />
     <div class="absolute bottom-0 left-0 w-80 h-80 bg-mint-300 rounded-full blur-3xl opacity-20" />
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
-      <div
-        v-motion
-        :initial="{ opacity: 0, y: 30 }"
-        :visible="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+      <Motion
+        tag="div"
         class="text-center mb-16"
+        :initial="{ opacity: 0, y: 30 }"
+        :while-in-view="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.7, ease: 'easeOut' }"
+        :viewport="{ once: true }"
       >
         <h2
           class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-text bg-clip-text text-transparent"
         >
           Skills & Expertise
         </h2>
-        <p class="text-xl text-charcoal-700">Technologies & Tools I Work With</p>
-      </div>
+        <p class="text-xl text-charcoal-600">Technologies & Tools I Work With</p>
+      </Motion>
 
-      <!-- Skills Tag Cloud -->
-      <div
-        v-if="skillsData"
-        v-motion
-        :initial="{ opacity: 0, y: 20 }"
-        :visible="{ opacity: 1, y: 0, transition: { duration: 600, delay: 200 } }"
-        class="flex flex-wrap gap-3 justify-center"
+      <!-- Highway -->
+      <Motion
+        tag="div"
+        :initial="{ opacity: 0, y: 40 }"
+        :while-in-view="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.8, delay: 0.2, ease: 'easeOut' }"
+        :viewport="{ once: true }"
       >
-        <!-- Expert Level - Large -->
-        <Chip
-          v-for="skill in skillsByLevel.expert"
-          :key="skill.name"
-          :label="skill.name"
-          class="!bg-gradient-to-r from-[#7A453F] to-[#B9D1E9] !text-white !text-lg !px-6 !py-3 !font-semibold hover:!scale-110 transition-transform cursor-default shadow-md"
+        <SkillsHighway
+          :lane-a-fast="laneAFast"
+          :lane-a-slow="laneASlow"
+          :lane-b-slow="laneBSlow"
+          :lane-b-fast="laneBFast"
         />
+      </Motion>
 
-        <!-- Advanced Level - Medium -->
-        <Chip
-          v-for="skill in skillsByLevel.advanced"
-          :key="skill.name"
-          :label="skill.name"
-          class="!bg-gradient-to-r from-[#959684] to-[#B9D1E9] !text-white !text-base !px-5 !py-2 hover:!scale-105 transition-transform cursor-default shadow-sm"
-        />
-
-        <!-- Intermediate Level - Small -->
-        <Chip
-          v-for="skill in skillsByLevel.intermediate"
-          :key="skill.name"
-          :label="skill.name"
-          class="!bg-[#B9D1E9]/60 !text-[#2C2D32] !text-sm !px-4 !py-1.5 hover:!scale-105 transition-transform cursor-default"
-        />
-      </div>
-
-      <!-- Certifications & Languages -->
-      <div
-        v-if="skillsData"
-        v-motion
-        :initial="{ opacity: 0, y: 20 }"
-        :visible="{ opacity: 1, y: 0, transition: { duration: 600, delay: 400 } }"
-        class="grid md:grid-cols-2 gap-8"
-      >
-        <!-- Certifications -->
-        <Card class="shadow-lg">
-          <template #title>
-            <div class="flex items-center gap-2">
-              <Icon name="mdi:certificate" class="text-[#7A453F] text-2xl" />
-              <span class="text-xl text-[#2C2D32]">Certifications</span>
-            </div>
-          </template>
-          <template #content>
-            <div class="space-y-4">
-              <div
-                v-for="cert in (skillsData as any)?.certifications"
-                :key="cert.name"
-                class="border-l-4 border-[#7A453F] pl-4 py-2"
-              >
-                <h4 class="font-semibold text-[#2C2D32]">{{ cert.name }}</h4>
-                <p class="text-sm text-[#2C2D32]/70">{{ cert.issuer }} · {{ cert.date }}</p>
-              </div>
-            </div>
-          </template>
-        </Card>
-
-        <!-- Languages -->
-        <Card class="shadow-lg">
-          <template #title>
-            <div class="flex items-center gap-2">
-              <Icon name="mdi:translate" class="text-[#7A453F] text-2xl" />
-              <span class="text-xl text-[#2C2D32]">Languages</span>
-            </div>
-          </template>
-          <template #content>
-            <div class="space-y-4">
-              <div
-                v-for="lang in (skillsData as any)?.languages"
-                :key="lang.name"
-                class="border-l-4 border-[#B9D1E9] pl-4 py-2"
-              >
-                <h4 class="font-semibold text-[#2C2D32]">{{ lang.name }}</h4>
-                <p class="text-sm text-[#2C2D32]/70">{{ lang.level }}</p>
-              </div>
-            </div>
-          </template>
-        </Card>
-      </div>
+      <!-- Fast Lane Quote -->
+      <SkillsFastLaneQuote />
     </div>
   </section>
 </template>

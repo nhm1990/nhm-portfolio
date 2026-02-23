@@ -31,6 +31,21 @@ export default defineNuxtConfig({
     vueI18n: './i18n.config.ts',
   },
 
+  fonts: {
+    families: [{ name: 'Poppins', provider: 'google' }],
+    defaults: {
+      weights: [300, 400, 500, 600, 700],
+      styles: ['normal', 'italic'],
+    },
+  },
+
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
+
   css: ['~/assets/css/main.css'],
 
   devtools: { enabled: true },

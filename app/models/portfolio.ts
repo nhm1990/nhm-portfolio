@@ -1,21 +1,17 @@
 export interface Client {
   name: string
-  icon: string
-}
-
-interface Stat {
-  label: string
-  value: string
+  logo: string
 }
 
 export interface Project {
   id: number
   title: string
+  client: string
   category: string
   description: string
-  icon: string
+  image: string
   technologies: string[]
-  stats?: Stat[]
+  highlights: string[]
 }
 
 export interface PortfolioContent {
@@ -27,14 +23,11 @@ export interface PortfolioContent {
   }
   clients: {
     title: string
-    subtitle: string
-    cta: string
     list: Client[]
   }
   portfolio: {
     title: string
     subtitle: string
-    explore: string
     projects: Project[]
   }
   contact: {
