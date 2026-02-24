@@ -3,6 +3,7 @@ export type SkillLevel = 'expert' | 'advanced' | 'intermediate'
 export interface Skill {
   name: string
   level: SkillLevel
+  url?: string
 }
 
 export interface SkillCategory {

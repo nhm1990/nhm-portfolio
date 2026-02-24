@@ -6,7 +6,7 @@ const { data: rawData } = await useAsyncData('skills', () =>
   queryCollection('content_en').path('/skills').first()
 )
 
-const skillsData = computed(() => rawData.value?.meta as SkillsContent | null)
+const skillsData = computed(() => rawData.value?.meta as unknown as SkillsContent | null)
 
 const allSkills = computed<Skill[]>(() => {
   if (!skillsData.value?.categories) return []

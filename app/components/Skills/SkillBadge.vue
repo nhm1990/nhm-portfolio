@@ -4,6 +4,7 @@ import type { SkillLevel } from '~/models/skills'
 defineProps<{
   name: string
   level: SkillLevel
+  url?: string
 }>()
 
 const badgeClass: Record<SkillLevel, string> = {
@@ -30,9 +31,11 @@ const rimFill: Record<SkillLevel, string> = {
 </script>
 
 <template>
-  <span
-    class="inline-flex flex-col items-stretch gap-0 px-2.5 py-0 rounded-lg text-sm whitespace-nowrap select-none cursor-default transition-transform hover:scale-110"
-    :class="badgeClass[level]"
+  <component
+    :is="url ? 'a' : 'span'"
+    v-bind="url ? { href: url, target: '_blank', rel: 'noopener noreferrer' } : {}"
+    class="inline-flex flex-col items-stretch gap-0 px-2.5 py-0 rounded-lg text-sm whitespace-nowrap select-none transition-transform hover:scale-110 no-underline"
+    :class="[badgeClass[level], url ? 'cursor-pointer' : 'cursor-default']"
   >
     <!-- Top axle: 2 tires -->
     <span class="flex justify-between -mx-1 -mt-1">
@@ -64,5 +67,5 @@ const rimFill: Record<SkillLevel, string> = {
         <circle cx="7" cy="7" r="1.2" :fill="rimFill[level]" />
       </svg>
     </span>
-  </span>
+  </component>
 </template>

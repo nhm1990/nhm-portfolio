@@ -29,6 +29,7 @@ const doubled = computed(() => [...props.skills, ...props.skills])
         :key="`${skill.name}-${index}`"
         :name="skill.name"
         :level="skill.level"
+        :url="skill.url"
       />
     </div>
   </div>
