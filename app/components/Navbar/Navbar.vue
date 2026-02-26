@@ -1,21 +1,27 @@
 <script setup lang="ts">
-const { locale, t } = useI18n({ useScope: 'global' })
-const switchLocalePath = useSwitchLocalePath()
-const route = useRoute()
+import { Motion, useTransform } from 'motion-v'
+
+const { locale, setLocale, t } = useI18n({ useScope: 'global' })
 const mobileMenuOpen = ref(false)
 
+const { scrollYBoundedProgress } = useBoundedScroll(400)
+const scrollYBoundedProgressDelayed = useTransform(scrollYBoundedProgress, [0, 0.75, 1], [0, 0, 1])
+const navHeight = useTransform(scrollYBoundedProgressDelayed, [0, 1], [80, 52])
+
 const navItems = computed(() => [
-  { id: 'home', label: t('nav.home') },
-  { id: 'about', label: t('nav.about') },
-  { id: 'clients', label: t('nav.clients') },
   { id: 'portfolio', label: t('nav.portfolio') },
+  { id: 'skills', label: t('nav.skills') },
+  { id: 'experience', label: t('nav.experience') },
+  { id: 'clients', label: t('nav.clients') },
   { id: 'contact', label: t('nav.contact') },
 ])
 
-const toggleLanguage = async () => {
-  const newLocale = locale.value === 'en' ? 'de' : 'en'
-  const targetPath = switchLocalePath(newLocale)
-  await navigateTo({ path: targetPath, hash: route.hash })
+const toggleLanguage = () => {
+  setLocale(locale.value === 'en' ? 'de' : 'en')
+}
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const scrollToSection = (id: string) => {
@@ -39,15 +45,20 @@ const handleMobileNavClick = (id: string) => {
 </script>
 
 <template>
-  <nav
-    class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm"
+  <Motion
+    tag="nav"
+    class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm overflow-hidden"
+    :style="{ height: navHeight }"
   >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+      <div class="flex justify-between items-center h-full">
         <!-- Logo/Brand -->
         <div class="flex-shrink-0">
-          <a href="#home" class="text-2xl font-bold bg-gradient-text bg-clip-text text-transparent">
-            NH
+          <a
+            href="#"
+            class="text-2xl font-bold bg-gradient-text bg-clip-text text-transparent"
+            @click.prevent="scrollToTop()"
+            >NH
           </a>
         </div>
 
@@ -64,14 +75,14 @@ const handleMobileNavClick = (id: string) => {
           </a>
 
           <!-- Language Switcher -->
-          <div class="flex items-center space-x-2 ml-4 pl-4 border-l border-gray-300">
-            <Button
-              :label="locale === 'en' ? 'EN' : 'DE'"
-              class="!bg-gradient-primary !border-0"
-              outlined
-              size="small"
+          <div class="flex items-center ml-4 pl-4 border-l border-gray-200">
+            <button
+              class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold text-charcoal-700 border border-charcoal-300 hover:border-sage-500 hover:text-sage-600 transition-colors duration-200"
               @click="toggleLanguage"
-            />
+            >
+              <Icon name="mdi:web" class="text-base" />
+              {{ locale === 'en' ? 'EN' : 'DE' }}
+            </button>
           </div>
         </div>
 
@@ -99,17 +110,18 @@ const handleMobileNavClick = (id: string) => {
             >
               {{ item.label }}
             </a>
-            <Button
-              :label="locale === 'en' ? 'EN' : 'DE'"
-              class="!bg-gradient-primary !border-0 w-full"
-              size="small"
+            <button
+              class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-charcoal-700 border border-charcoal-300 hover:border-sage-500 hover:text-sage-600 transition-colors duration-200"
               @click="toggleLanguage"
-            />
+            >
+              <Icon name="mdi:web" class="text-base" />
+              {{ locale === 'en' ? 'EN' : 'DE' }}
+            </button>
           </div>
         </div>
       </transition>
     </div>
-  </nav>
+  </Motion>
 </template>
 
 <style scoped>

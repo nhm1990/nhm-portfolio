@@ -1,3 +1,43 @@
+<script setup lang="ts">
+const { t, locale } = useI18n()
+const { data: content } = useSectionData('hero')
+
+const seoTitle = computed(() =>
+  locale.value === 'de'
+    ? 'Nicolas Hormesch – Software-Entwickler Portfolio'
+    : 'Nicolas Hormesch – Software Developer Portfolio'
+)
+
+const seoOgTitle = computed(() =>
+  locale.value === 'de'
+    ? 'Nicolas Hormesch – Software-Entwickler'
+    : 'Nicolas Hormesch – Software Developer'
+)
+
+useSeoMeta({
+  title: () => seoTitle.value,
+  description: () => content.value?.description ?? '',
+  ogTitle: () => seoOgTitle.value,
+  ogDescription: () => content.value?.description ?? '',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+})
+
+const scrollToSection = (id: string) => {
+  const element = document.getElementById(id)
+  if (element) {
+    const offset = 80
+    const elementPosition = element.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - offset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    })
+  }
+}
+</script>
+
 <template>
   <section
     id="home"
@@ -27,16 +67,16 @@
             <span
               class="px-4 py-2 bg-sage-100 text-sage-700 rounded-full text-sm font-semibold shadow-sm border border-sage-200"
             >
-              {{ content.greeting }}
+              {{ content?.greeting }}
             </span>
           </div>
           <h1
             class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-text bg-clip-text text-transparent"
           >
-            {{ content.title }}
+            {{ content?.title }}
           </h1>
           <p class="text-lg md:text-xl text-charcoal-700 mb-8 max-w-2xl leading-relaxed">
-            {{ content.description }}
+            {{ content?.description }}
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <Button
@@ -99,37 +139,3 @@
     </div>
   </section>
 </template>
-
-<script setup lang="ts">
-const { t } = useI18n()
-
-interface Props {
-  content?: {
-    greeting: string
-    title: string
-    description: string
-  }
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  content: () => ({
-    greeting: 'Hi',
-    title: 'Loading...',
-    description: 'Please wait...',
-  }),
-})
-
-const scrollToSection = (id: string) => {
-  const element = document.getElementById(id)
-  if (element) {
-    const offset = 80
-    const elementPosition = element.getBoundingClientRect().top
-    const offsetPosition = elementPosition + window.pageYOffset - offset
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth',
-    })
-  }
-}
-</script>

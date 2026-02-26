@@ -1,21 +1,5 @@
 <script setup lang="ts">
-import type { Project } from '~/models/portfolio'
-
-interface Props {
-  content?: {
-    title: string
-    subtitle: string
-    projects: Project[]
-  }
-}
-
-withDefaults(defineProps<Props>(), {
-  content: () => ({
-    title: 'Loading...',
-    subtitle: 'Please wait...',
-    projects: [],
-  }),
-})
+const { data: content } = useSectionData('portfolio')
 </script>
 
 <template>
@@ -30,11 +14,11 @@ withDefaults(defineProps<Props>(), {
     />
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <PortfolioSectionHeader :title="content.title" :subtitle="content.subtitle" />
+      <PortfolioSectionHeader :title="content?.title ?? ''" :subtitle="content?.subtitle ?? ''" />
 
       <div class="space-y-32">
         <PortfolioCard
-          v-for="(project, index) in content.projects"
+          v-for="(project, index) in content?.projects ?? []"
           :key="project.id"
           :project="project"
           :index="index"

@@ -21,8 +21,8 @@ export default defineNuxtConfig({
   },
 
   i18n: {
+    strategy: 'no_prefix',
     defaultLocale: 'en',
-    lazy: true,
     langDir: '../app/locales',
     locales: [
       { code: 'en', name: 'English', file: 'en.json' },

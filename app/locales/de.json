@@ -1,8 +1,10 @@
 {
 	"nav": {
-		"home": "Start",
+		"home": "Home",
 		"about": "Über mich",
 		"portfolio": "Portfolio",
+		"skills": "Skills",
+		"experience": "Erfahrung",
 		"clients": "Kunden",
 		"contact": "Kontakt"
 	},

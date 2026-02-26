@@ -1,27 +1,6 @@
 <script setup lang="ts">
-interface Client {
-  name: string
-  icon: string
-}
-
-interface Props {
-  content?: {
-    title: string
-    subtitle: string
-    cta: string
-    list: Client[]
-  }
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  content: () => ({
-    title: 'Loading...',
-    subtitle: 'Please wait...',
-    cta: 'Loading...',
-    list: [],
-  }),
-})
 const { t } = useI18n({ useScope: 'global' })
+const { data: content } = useSectionData('clients')
 
 const scrollToSection = (id: string) => {
   const element = document.getElementById(id)
@@ -56,17 +35,17 @@ const scrollToSection = (id: string) => {
         <h2
           class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-text bg-clip-text text-transparent"
         >
-          {{ content.title }}
+          {{ content?.title }}
         </h2>
         <p class="text-xl text-charcoal-700">
-          {{ content.subtitle }}
+          {{ content?.subtitle }}
         </p>
       </div>
 
       <!-- Clients Grid -->
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
         <div
-          v-for="(client, index) in content.list"
+          v-for="(client, index) in content?.list ?? []"
           :key="client.name"
           :style="{ transitionDelay: `${index * 100}ms` }"
           class="flex items-center justify-center p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group border border-sage-100"
@@ -91,7 +70,7 @@ const scrollToSection = (id: string) => {
         <div class="absolute inset-0 bg-charcoal-900/60" />
         <div class="relative z-10">
           <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">
-            {{ content.cta }}
+            {{ content?.cta }}
           </h3>
           <Button
             :label="t('nav.contact')"
